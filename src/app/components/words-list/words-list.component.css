@@ -3,8 +3,6 @@
   width: 100vw;
   justify-content: center;
   text-align: center;
-  gap: 5rem;
-  margin-top: 5rem;
 }
 
 .column {
@@ -13,10 +11,11 @@
 }
 
 button {
-  width: 10rem;
-  height: 3rem;
+  width: 15rem;
+  height: 4rem;
   margin: 5px;
   border-radius: 0.5rem;
+  font-size: 1.5rem;
 }
 
 button.selected {

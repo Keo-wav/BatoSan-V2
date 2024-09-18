@@ -2,8 +2,9 @@
 
 body {
   font-family: Helvetica, sans-serif;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
-  background-color: #000000;
-  color: white;
+  background-image: url("https://images7.alphacoders.com/134/1348496.png");
+  background-position: center;
+  color: black;
 }
