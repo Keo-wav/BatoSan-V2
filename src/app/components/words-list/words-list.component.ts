@@ -83,7 +83,10 @@ export class WordsListComponent implements OnInit {
     } else {
       this.lastClickedWord = word;
       this.lastWordIndex = index;
-      if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
+      
+      if (this.lastClickedWord === this.firstClickedWord) {
+        window.alert("That's the same word, you colossal twat");
+      } else if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
         window.alert("Can't select a word from the same language, you bitch ass");
       } else {
         console.log('WORD 2 : ' + this.lastClickedWord);
