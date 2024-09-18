@@ -1,15 +1,20 @@
-<div class="container">
 
-  <div *ngFor="let word of shuffledEnglishWords; let i = index">
-    <button (click)="onClick(word, i)">
-      {{word}}
+<div>
+  <div>
+    <h3>Japanese Words</h3>
+    <button *ngFor="let word of shuffledJapaneseWords; let i = index"
+            (click)="onClick(word, i + shuffledEnglishWords.length)"
+            [ngClass]="buttonStates[i + shuffledEnglishWords.length]">
+      {{ word }}
     </button>
   </div>
 
-  <div *ngFor="let word of shuffledJapaneseWords; let i = index">
-    <button (click)="onClick(word, i)">
-      {{word}}
+  <div>
+    <h3>English Words</h3>
+    <button *ngFor="let word of shuffledEnglishWords; let i = index"
+            (click)="onClick(word, i)"
+            [ngClass]="buttonStates[i]">
+      {{ word }}
     </button>
   </div>
-
 </div>

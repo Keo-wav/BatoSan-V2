@@ -24,6 +24,8 @@ export class WordsListComponent implements OnInit {
   firstWordIndex: number | null = null;
   lastWordIndex: number | null = null;
 
+  buttonStates: string[] = [];
+
   // methods to load on component initialization
   ngOnInit(): void {
     this.getEnglishWords(this.wordsDatabase);
@@ -70,20 +72,39 @@ export class WordsListComponent implements OnInit {
     return this.japaneseWords
   }
 
+
+
   onClick(word: string, index: number) {
     if (this.firstClickedWord === null) {
       this.firstClickedWord = word;
       this.firstWordIndex = index;
-      console.log(this.firstClickedWord + ' (index : ' + this.firstWordIndex + ') has been clicked first.' +
-                  " its index in the words library is : " + this.wordsDatabase.indexOf(this.firstClickedWord));
+      this.buttonStates[index] = 'selected';  // Mark as selected (blue)
+      console.log('WORD 1 : ' + this.firstClickedWord);
     } else {
       this.lastClickedWord = word;
       this.lastWordIndex = index;
-      console.log(this.lastClickedWord + ' (index : ' + this.lastWordIndex + ') has been clicked last.' +
-                  " its index in the words library is : " + this.wordsDatabase.indexOf(this.lastClickedWord));
-      this.pairMatch(this.firstClickedWord, this.lastClickedWord);
-      this.resetSelection();
+      if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
+        window.alert("Can't select a word from the same language, you bitch ass");
+      } else {
+        console.log('WORD 2 : ' + this.lastClickedWord);
+        const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
+
+        if (isMatch) {
+          this.buttonStates[this.firstWordIndex!] = 'match';  // Mark as matched (green)
+          this.buttonStates[this.lastWordIndex!] = 'match';   // Mark as matched (green)
+        } else {
+          this.buttonStates[this.firstWordIndex!] = 'mismatch';  // Mark as mismatched (red)
+          this.buttonStates[this.lastWordIndex!] = 'mismatch';   // Mark as mismatched (red)
+        }
+
+        this.resetSelection();
+      }
     }
+  }
+
+  sameLanguageCheck(firstClickedWord: string, lastClickedWord: string): boolean {
+    return (this.englishWords.includes(firstClickedWord) && this.englishWords.includes(lastClickedWord)) ||
+      (this.japaneseWords.includes(firstClickedWord) && this.japaneseWords.includes(lastClickedWord));
   }
 
   resetSelection() {
@@ -92,12 +113,6 @@ export class WordsListComponent implements OnInit {
     this.firstWordIndex = null;
     this.lastWordIndex = null;
   }
-
-
-
-  // TODO : logic of pair selection. cannot select 2 words from the same language.
-  // TODO : logic of pair matching
-  // TODO : when 5 pairs have been successfully matched, alert or something
 
   pairMatch(firstClickedWord: string, lastClickedWord: string): boolean {
     // Check if the first word is English and the second word is Japanese
@@ -118,4 +133,6 @@ export class WordsListComponent implements OnInit {
       return false;
     }
   }
+
+
 }
