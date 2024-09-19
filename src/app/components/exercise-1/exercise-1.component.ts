@@ -1,4 +1,4 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, Input, SimpleChanges} from '@angular/core';
 import {NgClass, NgForOf} from "@angular/common";
 
 @Component({
@@ -26,12 +26,14 @@ export class Exercise1Component {
 
   buttonStates: string[] = [];
 
-  // methods to load on component initialization
-  ngOnInit(): void {
-    this.getEnglishWords(this.wordsDatabase);
-    this.shuffledEnglishWords = this.shuffle(this.englishWords);
-    this.getJapaneseWords(this.wordsDatabase);
-    this.shuffledJapaneseWords = this.shuffle(this.japaneseWords);
+  // methods to load on component initialization, after the database is populated
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['wordsDatabase'] && this.wordsDatabase.length > 0) {
+      this.getEnglishWords(this.wordsDatabase);
+      this.shuffledEnglishWords = this.shuffle(this.englishWords);
+      this.getJapaneseWords(this.wordsDatabase);
+      this.shuffledJapaneseWords = this.shuffle(this.japaneseWords);
+    }
   }
 
   // method to shuffle an array of words
