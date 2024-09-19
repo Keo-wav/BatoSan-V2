@@ -1,13 +1,26 @@
 #container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   height: 100px;
+  margin-bottom: 2.5rem;
 }
 
-a {
+input[type="number"] {
+  width: 45px;
+  height: 45px;
   padding: 10px;
+  font-size: large;
   border: 1px solid black;
-  border-radius: 1rem;
-  font-size: 16px;
-  font-weight: bolder;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form button {
+  height: 2rem;
 }
