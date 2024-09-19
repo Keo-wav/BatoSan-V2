@@ -16,6 +16,15 @@ button {
   margin: 5px;
   border-radius: 0.5rem;
   font-size: 1.5rem;
+  transition: ease-in-out 250ms;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  scale: 104%;
+  box-shadow: 4px 8px 8px 0 rgba(0, 0, 0, 0.2);
+  border: solid 2px lightgray;
 }
 
 button.selected {
