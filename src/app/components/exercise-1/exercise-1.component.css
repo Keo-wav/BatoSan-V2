@@ -1,0 +1,39 @@
+#container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  text-align: center;
+}
+
+.column {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+button {
+  width: 15rem;
+  height: 4rem;
+  margin: 5px;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+
+button.selected {
+  background-color: lightskyblue;
+  font-weight: bolder;
+}
+
+button.match {
+  background-color: lightgreen;
+  font-weight: bolder;
+}
+
+button.mismatch {
+  background-color: lightcoral;
+  font-weight: bolder;
+}
+
+button.default {
+  background-color: lightgray;
+  font-weight: bolder;
+}
