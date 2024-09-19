@@ -33,8 +33,44 @@ export class Exercise1Component {
       this.shuffledEnglishWords = this.shuffle(this.englishWords);
       this.getJapaneseWords(this.wordsDatabase);
       this.shuffledJapaneseWords = this.shuffle(this.japaneseWords);
+      this.displayExercise1();
     }
   }
+
+  // TODO : METHOD TO RANDOMLY CHOOSE 10 WORDS
+
+  // choose random index numbers
+  chooseWords(): void {
+    // clear arrays
+    this.shuffledEnglishWords = [];
+    this.shuffledJapaneseWords = [];
+
+    // settings definition
+    const numberOfWords: number = 5;
+    const selectedIndexes: Set<number> = new Set();
+
+    // choosing the random indexes
+    while (selectedIndexes.size < numberOfWords) {
+      const randomIndex = Math.floor(Math.random() * this.englishWords.length);
+      selectedIndexes.add(randomIndex);
+    }
+
+    // selecting en/jp words at same indexes
+    selectedIndexes.forEach(index => {
+      this.shuffledEnglishWords.push(this.englishWords[index]);
+      this.shuffledJapaneseWords.push(this.japaneseWords[index]);
+    })
+
+    // Shuffle arrays again
+    this.shuffledEnglishWords = this.shuffle(this.shuffledEnglishWords);
+    this.shuffledJapaneseWords = this.shuffle(this.shuffledJapaneseWords);
+  }
+
+  displayExercise1() {
+    this.chooseWords();
+  }
+
+  // TODO : USER IS ABLE TO SELECT HOW MANY WORDS PER PAGE
 
   // method to shuffle an array of words
   shuffle(array: string[]): string[]
