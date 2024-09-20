@@ -1,3 +1,2 @@
-<h1>BATOSAN</h1>
-<app-navbar ></app-navbar>
-<app-words-list></app-words-list>
+<h1 (click)="toggleGenerateWords()">BATOSAN</h1>
+<app-words-list [triggerGeneration]="shouldGenerateWords"></app-words-list>

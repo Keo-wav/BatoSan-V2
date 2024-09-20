@@ -13,4 +13,11 @@ import {Exercise1Component} from "./components/exercise-1/exercise-1.component";
 })
 export class AppComponent {
   title = 'BatosanV2';
+
+  shouldGenerateWords: boolean = false;
+
+  toggleGenerateWords(): void {
+    this.shouldGenerateWords = !this.shouldGenerateWords;
+    console.log('click');
+  }
 }

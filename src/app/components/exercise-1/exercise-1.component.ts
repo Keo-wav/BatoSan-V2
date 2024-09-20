@@ -13,6 +13,7 @@ import {NgClass, NgForOf} from "@angular/common";
 })
 export class Exercise1Component {
   @Input() wordsDatabase: string[] = [];
+  @Input() shouldGenerateWords: boolean = false;
 
   englishWords: string[] = [];
   shuffledEnglishWords: string[] = [];
@@ -35,9 +36,13 @@ export class Exercise1Component {
       this.shuffledJapaneseWords = this.shuffle(this.japaneseWords);
       this.displayExercise1();
     }
+
+    if (changes['shouldGenerateWords'] && changes['shouldGenerateWords'].currentValue) {
+      this.displayExercise1();
+    }
   }
 
-  // TODO : METHOD TO RANDOMLY CHOOSE 10 WORDS
+  // TODO : GENERATE 5 OTHER WORDS WHEN 5 PAIRS ARE MATCHED
 
   // choose random index numbers
   chooseWords(): void {
@@ -68,6 +73,7 @@ export class Exercise1Component {
 
   displayExercise1() {
     this.chooseWords();
+    this.buttonStates = [];
   }
 
   // TODO : USER IS ABLE TO SELECT HOW MANY WORDS PER PAGE
@@ -119,9 +125,9 @@ export class Exercise1Component {
       this.lastWordIndex = index;
 
       if (this.lastClickedWord === this.firstClickedWord) {
-        window.alert("That's the same word, you colossal twat");
+        window.alert("That's the same word.");
       } else if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
-        window.alert("Can't select a word from the same language, you bitch ass");
+        window.alert("Can't select a word from the same language.");
       } else {
         console.log('WORD 2 : ' + this.lastClickedWord);
         const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
@@ -129,6 +135,16 @@ export class Exercise1Component {
         if (isMatch) {
           this.buttonStates[this.firstWordIndex!] = 'match';  // Mark as matched (green)
           this.buttonStates[this.lastWordIndex!] = 'match';   // Mark as matched (green)
+
+          // Check if all pairs are matched only after marking the last pair as 'match'
+          if (this.areAllPairsMatched()) {
+            console.log('All pairs matched, generating new words...');
+
+            // Delay generating new words to allow the UI to update the last matched pair
+            setTimeout(() => {
+              this.displayExercise1();
+            }, 1500);
+          }
         } else {
           this.buttonStates[this.firstWordIndex!] = 'mismatch';  // Mark as mismatched (red)
           this.buttonStates[this.lastWordIndex!] = 'mismatch';   // Mark as mismatched (red)
@@ -137,6 +153,10 @@ export class Exercise1Component {
         this.resetSelection();
       }
     }
+  }
+
+  areAllPairsMatched(): boolean {
+    return this.buttonStates.filter(state => state === 'match').length === 10;
   }
 
   sameLanguageCheck(firstClickedWord: string, lastClickedWord: string): boolean {

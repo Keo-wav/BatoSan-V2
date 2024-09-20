@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Exercise1Component } from '../exercise-1/exercise-1.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -12,6 +12,7 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./words-list.component.css']
 })
 export class WordsListComponent implements OnInit {
+  @Input() triggerGeneration: boolean = false;
   wordsDatabase: string[] = [];
   apiKey: string = environment.apiKey;
   spreadsheetID: string = environment.spreadsheetID;

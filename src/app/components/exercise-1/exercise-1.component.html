@@ -1,6 +1,7 @@
 <div id="container">
   <div class="column">
-    <button *ngFor="let word of shuffledJapaneseWords; let i = index"
+    <button class="button"
+            *ngFor="let word of shuffledJapaneseWords; let i = index"
             (click)="onClick(word, i + shuffledEnglishWords.length)"
             [ngClass]="buttonStates[i + shuffledEnglishWords.length]">
       {{ word }}
@@ -8,7 +9,8 @@
   </div>
 
   <div class="column">
-    <button *ngFor="let word of shuffledEnglishWords; let i = index"
+    <button class="button"
+            *ngFor="let word of shuffledEnglishWords; let i = index"
             (click)="onClick(word, i)"
             [ngClass]="buttonStates[i]">
       {{ word }}
