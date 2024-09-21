@@ -1,12 +1,13 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
-import {NgClass, NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-exercise-1',
   standalone: true,
   imports: [
     NgForOf,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './exercise-1.component.html',
   styleUrl: './exercise-1.component.css'
@@ -26,6 +27,9 @@ export class Exercise1Component {
   lastWordIndex: number | null = null;
 
   buttonStates: string[] = [];
+
+  isAlertVisible: boolean = false;
+  alertMessage: string = "";
 
   // methods to load on component initialization, after the database is populated
   ngOnChanges(changes: SimpleChanges): void {
@@ -125,9 +129,9 @@ export class Exercise1Component {
       this.lastWordIndex = index;
 
       if (this.lastClickedWord === this.firstClickedWord) {
-        window.alert("That's the same word, you colossal twat");
+        this.showAlert("That's the same word, you colossal twat");
       } else if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
-        window.alert("Can't select a word from the same language, you bitch ass");
+        this.showAlert("Can't select a word from the same language, you bitch ass");
       } else {
         console.log('WORD 2 : ' + this.lastClickedWord);
         const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
@@ -140,7 +144,7 @@ export class Exercise1Component {
           // Check if all pairs are matched only after marking the last pair as 'match'
           if (this.areAllPairsMatched()) {
             console.log('All pairs matched, generating new words...');
-            window.alert("Félicitations, pauvre con!");
+            this.showAlert("Félicitations, pauvre con!");
 
             // Delay generating new words to allow the UI to update the last matched pair
             setTimeout(() => {
@@ -156,7 +160,7 @@ export class Exercise1Component {
             this.buttonStates[this.firstWordIndex!] = '';
             this.buttonStates[this.lastWordIndex!] = '';
             this.resetSelection();
-          }, 800);
+          }, 500);
         }
 
       }
@@ -197,5 +201,15 @@ export class Exercise1Component {
       console.log("Not a match.");
       return false;
     }
+  }
+
+  showAlert(message: string): void {
+    console.log("Alert triggered with message:", message);
+    this.alertMessage = message;
+    this.isAlertVisible = true;
+  }
+
+  closeAlert(): void {
+    this.isAlertVisible = false;
   }
 }

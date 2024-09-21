@@ -17,3 +17,10 @@
     </button>
   </div>
 </div>
+
+<div *ngIf="isAlertVisible" class="alert-modal">
+  <div class="alert-content">
+    <p>{{this.alertMessage}}</p>
+    <button (click)="closeAlert()">OK</button>
+  </div>
+</div>
