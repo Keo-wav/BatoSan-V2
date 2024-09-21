@@ -1,12 +1,13 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
-import {NgClass, NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-exercise-1',
   standalone: true,
   imports: [
     NgForOf,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './exercise-1.component.html',
   styleUrl: './exercise-1.component.css'
@@ -27,6 +28,9 @@ export class Exercise1Component {
 
   buttonStates: string[] = [];
 
+  isAlertVisible: boolean = false;
+  alertMessage: string = "";
+
   // methods to load on component initialization, after the database is populated
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['wordsDatabase'] && this.wordsDatabase.length > 0) {
@@ -41,8 +45,6 @@ export class Exercise1Component {
       this.displayExercise1();
     }
   }
-
-  // TODO : GENERATE 5 OTHER WORDS WHEN 5 PAIRS ARE MATCHED
 
   // choose random index numbers
   chooseWords(): void {
@@ -75,8 +77,6 @@ export class Exercise1Component {
     this.chooseWords();
     this.buttonStates = [];
   }
-
-  // TODO : USER IS ABLE TO SELECT HOW MANY WORDS PER PAGE
 
   // method to shuffle an array of words
   shuffle(array: string[]): string[]
@@ -115,43 +115,55 @@ export class Exercise1Component {
   }
 
   onClick(word: string, index: number) {
+    if (this.buttonStates[index] === 'match') {
+      this.showAlert("Already validated this one, my man. Don't be a piece of shit :)")
+      return;
+    }
+
     if (this.firstClickedWord === null) {
       this.firstClickedWord = word;
       this.firstWordIndex = index;
-      this.buttonStates[index] = 'selected';  // Mark as selected (blue)
+      this.buttonStates[index] = 'selected';
       console.log('WORD 1 : ' + this.firstClickedWord);
     } else {
       this.lastClickedWord = word;
       this.lastWordIndex = index;
 
       if (this.lastClickedWord === this.firstClickedWord) {
-        window.alert("That's the same word, you colossal twat");
+        this.showAlert("That's the same word, you colossal twat");
       } else if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
-        window.alert("Can't select a word from the same language, you bitch ass");
+        this.showAlert("Can't select a word from the same language, you bitch ass");
       } else {
         console.log('WORD 2 : ' + this.lastClickedWord);
         const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
 
-        if (isMatch) {
-          this.buttonStates[this.firstWordIndex!] = 'match';  // Mark as matched (green)
-          this.buttonStates[this.lastWordIndex!] = 'match';   // Mark as matched (green)
+        if (isMatch) { // Mark as matched (green)
+          this.buttonStates[this.firstWordIndex!] = 'match';
+          this.buttonStates[this.lastWordIndex!] = 'match';
+          this.resetSelection();
 
           // Check if all pairs are matched only after marking the last pair as 'match'
           if (this.areAllPairsMatched()) {
             console.log('All pairs matched, generating new words...');
-            window.alert("Félicitations, pauvre con!");
+            this.showAlert("Félicitations, pauvre con!");
 
             // Delay generating new words to allow the UI to update the last matched pair
             setTimeout(() => {
               this.displayExercise1();
-            }, 1500);
+            }, 1000);
           }
-        } else {
-          this.buttonStates[this.firstWordIndex!] = 'mismatch';  // Mark as mismatched (red)
-          this.buttonStates[this.lastWordIndex!] = 'mismatch';   // Mark as mismatched (red)
+        } else { // Mark as mismatched (red)
+          this.buttonStates[this.firstWordIndex!] = 'mismatch';
+          this.buttonStates[this.lastWordIndex!] = 'mismatch';
+
+          setTimeout(() => { // used to clear the mismatch color
+            console.log("Resetting mismatch colors for:", this.firstWordIndex, this.lastWordIndex);
+            this.buttonStates[this.firstWordIndex!] = '';
+            this.buttonStates[this.lastWordIndex!] = '';
+            this.resetSelection();
+          }, 500);
         }
 
-        this.resetSelection();
       }
     }
   }
@@ -190,5 +202,15 @@ export class Exercise1Component {
       console.log("Not a match.");
       return false;
     }
+  }
+
+  showAlert(message: string): void {
+    console.log("Alert triggered with message:", message);
+    this.alertMessage = message;
+    this.isAlertVisible = true;
+  }
+
+  closeAlert(): void {
+    this.isAlertVisible = false;
   }
 }
