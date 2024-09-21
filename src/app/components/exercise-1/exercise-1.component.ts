@@ -46,8 +46,6 @@ export class Exercise1Component {
     }
   }
 
-  // TODO : GENERATE 5 OTHER WORDS WHEN 5 PAIRS ARE MATCHED
-
   // choose random index numbers
   chooseWords(): void {
     // clear arrays
@@ -79,8 +77,6 @@ export class Exercise1Component {
     this.chooseWords();
     this.buttonStates = [];
   }
-
-  // TODO : USER IS ABLE TO SELECT HOW MANY WORDS PER PAGE
 
   // method to shuffle an array of words
   shuffle(array: string[]): string[]
@@ -119,10 +115,15 @@ export class Exercise1Component {
   }
 
   onClick(word: string, index: number) {
+    if (this.buttonStates[index] === 'match') {
+      this.showAlert("Already validated this one, my man. Don't be a piece of shit :)")
+      return;
+    }
+
     if (this.firstClickedWord === null) {
       this.firstClickedWord = word;
       this.firstWordIndex = index;
-      this.buttonStates[index] = 'selected';  // Mark as selected (blue)
+      this.buttonStates[index] = 'selected';
       console.log('WORD 1 : ' + this.firstClickedWord);
     } else {
       this.lastClickedWord = word;
