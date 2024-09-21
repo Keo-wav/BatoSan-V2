@@ -1,8 +1,0 @@
-#container {
-  height: 5rem;
-  margin: 3rem 0 3rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-}
