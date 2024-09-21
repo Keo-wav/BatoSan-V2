@@ -125,9 +125,9 @@ export class Exercise1Component {
       this.lastWordIndex = index;
 
       if (this.lastClickedWord === this.firstClickedWord) {
-        window.alert("That's the same word.");
+        window.alert("That's the same word, you colossal twat");
       } else if (this.sameLanguageCheck(this.firstClickedWord, this.lastClickedWord)) {
-        window.alert("Can't select a word from the same language.");
+        window.alert("Can't select a word from the same language, you bitch ass");
       } else {
         console.log('WORD 2 : ' + this.lastClickedWord);
         const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
@@ -139,6 +139,7 @@ export class Exercise1Component {
           // Check if all pairs are matched only after marking the last pair as 'match'
           if (this.areAllPairsMatched()) {
             console.log('All pairs matched, generating new words...');
+            window.alert("Félicitations, pauvre con!");
 
             // Delay generating new words to allow the UI to update the last matched pair
             setTimeout(() => {

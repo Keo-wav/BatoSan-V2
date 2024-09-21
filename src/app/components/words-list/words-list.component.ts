@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Exercise1Component } from '../exercise-1/exercise-1.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {environment} from "../../../environments/environment";
+import {NavbarComponent} from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-words-list',
   standalone: true,
-  imports: [CommonModule, Exercise1Component, HttpClientModule],  // Add HttpClientModule here
+  imports: [CommonModule, Exercise1Component, HttpClientModule, NavbarComponent],
   templateUrl: './words-list.component.html',
   styleUrls: ['./words-list.component.css']
 })
