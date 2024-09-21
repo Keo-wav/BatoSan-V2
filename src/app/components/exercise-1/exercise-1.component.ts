@@ -132,9 +132,10 @@ export class Exercise1Component {
         console.log('WORD 2 : ' + this.lastClickedWord);
         const isMatch = this.pairMatch(this.firstClickedWord, this.lastClickedWord);
 
-        if (isMatch) {
-          this.buttonStates[this.firstWordIndex!] = 'match';  // Mark as matched (green)
-          this.buttonStates[this.lastWordIndex!] = 'match';   // Mark as matched (green)
+        if (isMatch) { // Mark as matched (green)
+          this.buttonStates[this.firstWordIndex!] = 'match';
+          this.buttonStates[this.lastWordIndex!] = 'match';
+          this.resetSelection();
 
           // Check if all pairs are matched only after marking the last pair as 'match'
           if (this.areAllPairsMatched()) {
@@ -144,14 +145,20 @@ export class Exercise1Component {
             // Delay generating new words to allow the UI to update the last matched pair
             setTimeout(() => {
               this.displayExercise1();
-            }, 1500);
+            }, 1000);
           }
-        } else {
-          this.buttonStates[this.firstWordIndex!] = 'mismatch';  // Mark as mismatched (red)
-          this.buttonStates[this.lastWordIndex!] = 'mismatch';   // Mark as mismatched (red)
+        } else { // Mark as mismatched (red)
+          this.buttonStates[this.firstWordIndex!] = 'mismatch';
+          this.buttonStates[this.lastWordIndex!] = 'mismatch';
+
+          setTimeout(() => { // used to clear the mismatch color
+            console.log("Resetting mismatch colors for:", this.firstWordIndex, this.lastWordIndex);
+            this.buttonStates[this.firstWordIndex!] = '';
+            this.buttonStates[this.lastWordIndex!] = '';
+            this.resetSelection();
+          }, 800);
         }
 
-        this.resetSelection();
       }
     }
   }
