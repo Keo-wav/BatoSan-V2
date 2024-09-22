@@ -18,6 +18,15 @@
   </div>
 </div>
 
+<div id="statsContainer" *ngIf="mismatchStats">
+  <h3>Mismatched Words Stats:</h3>
+  <ul>
+    <li *ngFor="let word of getMismatchStatsKeys()">
+      {{ word }}: {{ mismatchStats[word] }} mismatches
+    </li>
+  </ul>
+</div>
+
 <div *ngIf="isAlertVisible" class="alert-modal">
   <div class="alert-content">
     <p>{{this.alertMessage}}</p>
