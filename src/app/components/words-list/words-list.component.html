@@ -1,2 +1,3 @@
 <app-navbar></app-navbar>
-<app-exercise-1 [shouldGenerateWords]="triggerGeneration" [wordsDatabase]="wordsDatabase"></app-exercise-1>
+<app-exercise-1 *ngIf="isExerciseVisible" [shouldGenerateWords]="triggerGeneration" [wordsDatabase]="wordsDatabase"></app-exercise-1>
+<app-dictionary *ngIf="isDictionaryVisible" [wordsDatabase]="wordsDatabase"></app-dictionary>
