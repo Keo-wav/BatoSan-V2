@@ -18,11 +18,11 @@
   </div>
 </div>
 
-<div id="statsContainer" *ngIf="mismatchStats">
-  <h3>Mismatched Words Stats:</h3>
-  <ul>
+ <div id="statsContainer" *ngIf="mismatchStats">
+  <h3>Mismatch counter:</h3>
+  <ul id="statsList">
     <li *ngFor="let word of getMismatchStatsKeys()">
-      {{ word }}: {{ mismatchStats[word] }} mismatches
+      {{ word }}: {{ mismatchStats[word] }}
     </li>
   </ul>
 </div>

@@ -6,3 +6,13 @@
   align-items: center;
   border: 1px solid black;
 }
+
+#navlist {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.navlink {
+  list-style-type: none;
+}

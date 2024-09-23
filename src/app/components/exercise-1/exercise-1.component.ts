@@ -163,11 +163,10 @@ export class Exercise1Component {
           this.updateMismatchStats(this.lastClickedWord);
 
           setTimeout(() => { // used to clear the mismatch color
-            console.log("Resetting mismatch colors for:", this.firstWordIndex, this.lastWordIndex);
             this.buttonStates[this.firstWordIndex!] = '';
             this.buttonStates[this.lastWordIndex!] = '';
             this.resetSelection();
-          }, 500);
+          }, 400);
         }
 
       }

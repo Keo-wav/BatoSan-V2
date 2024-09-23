@@ -48,6 +48,34 @@ button.default {
   font-weight: bolder;
 }
 
+/* STATS SECTION STYLING */
+
+#statsContainer {
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 2rem;
+  overflow-y: auto;
+  width: 100%;
+}
+
+#statsList {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 1rem;
+  gap: 1rem;
+}
+
+li {
+  list-style-type: none;
+  height: 2rem;
+  padding: 5px;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 4px;
+  text-align: left;
+}
+
 /* MODAL ALERT STYLING */
 
 .alert-modal {
