@@ -9,4 +9,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  onNavLinkClick(event: MouseEvent) {
+    const target = event.currentTarget as HTMLElement;
+    target.classList.add('clicked');
+    setTimeout(() => {
+      target.classList.remove('clicked');
+    }, 100);
+  }
+
 }

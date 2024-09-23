@@ -50,7 +50,7 @@ button.default {
 
 /* STATS SECTION STYLING */
 
-#statsContainer {
+/*#statsContainer {
   background-color: rgba(0,0,0,0.1);
   display: flex;
   flex-flow: row nowrap;
@@ -74,7 +74,7 @@ li {
   background-color: rgba(255,255,255,0.8);
   border-radius: 4px;
   text-align: left;
-}
+}*/
 
 /* MODAL ALERT STYLING */
 

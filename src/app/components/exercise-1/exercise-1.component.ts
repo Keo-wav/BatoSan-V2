@@ -31,7 +31,7 @@ export class Exercise1Component {
   isAlertVisible: boolean = false;
   alertMessage: string = "";
 
-  mismatchStats: { [word: string]: number } = {};
+  // mismatchStats: { [word: string]: number } = {};
 
   // methods to load on component initialization, after the database is populated
   ngOnChanges(changes: SimpleChanges): void {
@@ -159,8 +159,8 @@ export class Exercise1Component {
           this.buttonStates[this.lastWordIndex!] = 'mismatch';
 
           // Track mismatches for both words
-          this.updateMismatchStats(this.firstClickedWord);
-          this.updateMismatchStats(this.lastClickedWord);
+/*          this.updateMismatchStats(this.firstClickedWord);
+          this.updateMismatchStats(this.lastClickedWord);*/
 
           setTimeout(() => { // used to clear the mismatch color
             this.buttonStates[this.firstWordIndex!] = '';
@@ -219,7 +219,7 @@ export class Exercise1Component {
     this.isAlertVisible = false;
   }
 
-  updateMismatchStats(word: string): void {
+/*  updateMismatchStats(word: string): void {
     if (this.mismatchStats[word]) {
       this.mismatchStats[word]++;
     } else {
@@ -230,5 +230,5 @@ export class Exercise1Component {
 
   getMismatchStatsKeys(): string[] {
     return Object.keys(this.mismatchStats);
-  }
+  }*/
 }
