@@ -1,18 +1,37 @@
 #container {
   height: 5rem;
   margin: 3rem 0 3rem 0;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
 }
 
 #navlist {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 .navlink {
   list-style-type: none;
+}
+
+.navlink a {
+  text-decoration: none;
+}
+
+i {
+  font-size: 2rem;
+  background-color: #FFFFFF;
+  width: 5rem;
+  height: 4rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
