@@ -4,11 +4,12 @@ import { Exercise1Component } from '../exercise-1/exercise-1.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {DictionaryComponent} from "../dictionary/dictionary.component";
 
 @Component({
   selector: 'app-words-list',
   standalone: true,
-  imports: [CommonModule, Exercise1Component, HttpClientModule, NavbarComponent],
+  imports: [CommonModule, Exercise1Component, HttpClientModule, NavbarComponent, DictionaryComponent],
   templateUrl: './words-list.component.html',
   styleUrls: ['./words-list.component.css']
 })
@@ -18,6 +19,9 @@ export class WordsListComponent implements OnInit {
   apiKey: string = environment.apiKey;
   spreadsheetID: string = environment.spreadsheetID;
   sheetRange: string = environment.sheetRange;
+
+  isDictionaryVisible: boolean = true;
+  isExerciseVisible: boolean = false;
 
   constructor(private http: HttpClient) {}
 
