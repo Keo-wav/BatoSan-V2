@@ -1,1 +1,12 @@
-
+<div id="container">
+  <div class="column">
+    <ul *ngFor="let englishWord of englishWords">
+      <li>{{englishWord}}</li>
+    </ul>
+  </div>
+  <div class="column">
+    <ul *ngFor="let japaneseWord of japaneseWords">
+      <li>{{japaneseWord}}</li>
+    </ul>
+  </div>
+</div>
